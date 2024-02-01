@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: metabase-deployment
+spec:
+  replicas: 3 # Anzahl der Replikate, je nach Bedarf anpassen
+  selector:
+    matchLabels:
+      app: metabase
+  template:
+    metadata:
+      labels:
+        app: metabase
+    spec:
+      containers:
+      - name: metabase
+        image: metabase/metabase # Metabase-Image
+        ports:
+        - containerPort: 3000 
+        env:
+        - name: MB_DB_FILE
+          value: /metabase.db 
