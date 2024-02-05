@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-traffic-to-metabase
+spec:
+  podSelector:
+    matchLabels:
+      app: metabase
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - ports:
+        - port: 3000
+          protocol: TCP
+  egress:
+    - ports:
+        - port: 80
+          protocol: TCP
